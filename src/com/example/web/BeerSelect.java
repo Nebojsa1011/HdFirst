@@ -12,16 +12,23 @@ public class BeerSelect extends HttpServlet {
 			HttpServletResponse response)
 			throws IOException, ServletException {
 	
-	response.setContentType("text/html");
-	PrintWriter out = response.getWriter();
-	out.println("Beer Selection Advice<br>");
+	//response.setContentType("text/html");
+	//PrintWriter out = response.getWriter();
+	//out.println("Beer Selection Advice<br>");
 	String c = request.getParameter("color");
 
 	BeerExpert be = new BeerExpert();
 	List result = be.getBrands(c);
-	Iterator it = result.iterator();
-	while(it.hasNext()) {
-		out.print("<br>try: " + it.next());
-	}
+	//Iterator it = result.iterator();
+	//while(it.hasNext()) {
+	//	out.print("<br>try: " + it.next());
+	//}
+
+	request.setAttribute("styles", result);
+	
+	RequestDispatcher view =
+		request.getRequestDispatcher("result.jsp");
+
+	view.forward(request, response);
 	}
 }
